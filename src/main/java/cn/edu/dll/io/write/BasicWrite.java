@@ -174,6 +174,7 @@ public class BasicWrite {
         }
     }
 
+
     public void endWriting() {
         try {
             bufferedWriter.close();
