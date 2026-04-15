@@ -88,4 +88,12 @@ public class MapUtils {
         return result;
     }
 
+    public static <K extends Comparable<K>, V> TreeMap<K, V> getInitializedTreeMap(Set<K> keySet, V initializedValue) {
+        TreeMap<K, V> resultMap = new TreeMap<>();
+        for (K key : keySet) {
+            resultMap.put(key, initializedValue);
+        }
+        return resultMap;
+    }
+
 }
