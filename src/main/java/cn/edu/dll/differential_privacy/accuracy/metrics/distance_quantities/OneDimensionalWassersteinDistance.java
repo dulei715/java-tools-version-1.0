@@ -47,7 +47,6 @@ public class OneDimensionalWassersteinDistance {
 //                row = n;
 //                column = t - row;
 //                if (row < xLen && column < yLen) {
-////                    System.out.println(distributionDataA[row][column]);
 //                    diagValueA[row][column] = distributionDataA[row][column];
 //                    diagValueB[row][column] = distributionDataB[row][column];
 //                    int topIndex = row - 1;

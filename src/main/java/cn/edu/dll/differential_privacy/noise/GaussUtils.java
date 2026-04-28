@@ -5,17 +5,21 @@ import cn.edu.dll.basic.NumberUtil;
 import java.util.Random;
 
 public class GaussUtils {
-    private Random random = new Random();
+    private final Random random;
 
 //    public GaussUtils(double sensitivity, double epsilon, double delta) {
 //        this.gaussDistribution = new Gaussian(0, Math.sqrt(2*Math.log(1/delta))*sensitivity/epsilon);
 //    }
-    public static double[] getGaussNoise(double sensitivity, double epsilon, double delta, int number){
-        Random tempRandom = new Random();
+
+    public GaussUtils(Long seed) {
+        this.random = new Random(seed);
+    }
+
+    public static double[] getGaussNoise(double sensitivity, double epsilon, double delta, int number, Random random){
         double standardVariance = Math.sqrt(2*Math.log(1/delta))*sensitivity/epsilon;
         double[] result = new double[number];
         for (int i = 0; i < number; i++) {
-            result[i] = tempRandom.nextGaussian()*standardVariance;
+            result[i] = random.nextGaussian()*standardVariance;
         }
         return result;
     }

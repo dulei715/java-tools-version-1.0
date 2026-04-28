@@ -153,6 +153,39 @@ public class StatisticTool {
         return result;
     }
 
+    public static Double getWassersteinDistance(final Map<String, Integer> rawData, final Map<String, Double> estimationData) {
+        if (rawData == null || estimationData == null) {
+            throw new RuntimeException("Input maps cannot be null!");
+        }
+
+        if (rawData.size() != estimationData.size()) {
+            throw new RuntimeException("The two distribution's element size is not equal!");
+        }
+
+        Set<String> rawKeys = rawData.keySet();
+        Set<String> estimationKeys = estimationData.keySet();
+
+        if (!rawKeys.containsAll(estimationKeys) || !estimationKeys.containsAll(rawKeys)) {
+            throw new RuntimeException("The keys of two distributions are not equal!");
+        }
+
+        List<String> sortedKeys = new ArrayList<>(rawKeys);
+        Collections.sort(sortedKeys);
+
+        Double result = 0.0;
+        Double rawCumulative = 0.0;
+        Double estimationCumulative = 0.0;
+
+        for (String key : sortedKeys) {
+            rawCumulative += rawData.get(key);
+            estimationCumulative += estimationData.get(key);
+            result += Math.abs(rawCumulative - estimationCumulative);
+        }
+
+        return result;
+    }
+
+
     /**
      * 极大似然估计
      * @param value
