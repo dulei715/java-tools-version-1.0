@@ -4,6 +4,7 @@ import cn.edu.dll.struct.bean_structs.BeanInterface;
 import cn.edu.dll.struct.point.TwoDimensionalIntegerPoint;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class CSVWrite extends BasicWrite{
@@ -116,6 +117,16 @@ public class CSVWrite extends BasicWrite{
                 this.bufferedWriter.newLine();
             }
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public <T extends BeanInterface<T>> void writeBeanListWithMethod(List<T> beanList, Method toStringMethod) {
+        try {
+            for (T bean : beanList) {
+                this.bufferedWriter.write((String) toStringMethod.invoke(bean));
+                this.bufferedWriter.newLine();
+            }
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
